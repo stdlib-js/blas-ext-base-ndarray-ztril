@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,19 +16,11 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
 
-var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
-var getShape = require( '@stdlib/ndarray-base-shape' );
-var getStrides = require( '@stdlib/ndarray-base-strides' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-var strided = require( '@stdlib/blas-ext-base-ztril' ).ndarray;
-
-
-// MAIN //
+import { complex128ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Copies the lower triangular part of a double-precision complex floating-point matrix `A` to another matrix `B`.
@@ -41,8 +33,8 @@ var strided = require( '@stdlib/blas-ext-base-ztril' ).ndarray;
 *     -   a two-dimensional output ndarray corresponding to `B`.
 *     -   a zero-dimensional ndarray specifying the diagonal above which to ignore.
 *
-* @param {ArrayLikeObject<Object>} arrays - array-like object containing ndarrays
-* @returns {Object} output ndarray
+* @param arrays - array-like object containing ndarrays
+* @returns output ndarray
 *
 * @example
 * var Complex128Matrix = require( '@stdlib/ndarray-matrix-complex128' );
@@ -61,27 +53,9 @@ var strided = require( '@stdlib/blas-ext-base-ztril' ).ndarray;
 * var bool = ( out === B );
 * // returns true
 */
-function ztril( arrays ) {
-	var sh;
-	var sa;
-	var sb;
-	var A;
-	var B;
-	var k;
-
-	A = arrays[ 0 ];
-	B = arrays[ 1 ];
-	k = ndarraylike2scalar( arrays[ 2 ] );
-
-	sh = getShape( A, false );
-	sa = getStrides( A, false );
-	sb = getStrides( B, false );
-
-	strided( sh[ 0 ], sh[ 1 ], k, getData( A ), sa[ 0 ], sa[ 1 ], getOffset( A ), getData( B ), sb[ 0 ], sb[ 1 ], getOffset( B ) ); // eslint-disable-line max-len
-	return B;
-}
+declare function ztril( arrays: [ complex128ndarray, complex128ndarray, typedndarray<number> ] ): complex128ndarray;
 
 
 // EXPORTS //
 
-module.exports = ztril;
+export = ztril;
